@@ -3,7 +3,9 @@
 <h1><%= t :'.title'%></h1>
 
 <p>
+<% if user_signed_in? %>
 	<%= link_to 'Ajouter', new_pokemon_path, class: 'btn btn-success' %>
+<% end %>
 </p>
 
 <% if @pokemons.any? %>

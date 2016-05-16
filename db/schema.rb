@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 20160504143840) do
     t.integer "number"
     t.integer "level"
     t.integer "health_points"
+    t.float   "price"
     t.integer "type_id"
   end
 

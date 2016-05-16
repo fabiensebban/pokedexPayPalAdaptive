@@ -58,5 +58,6 @@ Rails.application.routes.draw do
   #   end
   root 'home#index'
   get 'index' => 'home#index'
+  get 'buy' => 'pokemons#buy' 
   resources :pokemons
 end
