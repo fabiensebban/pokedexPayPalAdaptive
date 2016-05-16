@@ -9,6 +9,7 @@ class PokemonsController < ApplicationController
 	before_action :check_minimum
 	before_action :authenticate_user!, only: [:new, :create]
 	
+	include PaypalHelper
 	@@data = YAML.load_file('config/paypal.yml')
 
 	def index 
@@ -53,21 +54,8 @@ class PokemonsController < ApplicationController
 	# 	#{Rails.Rails.application.paypal.LA_VARIABLE} 
 
 	def buy
-		values = {
-		    :business => 'scarpa.zend-facilitator@gmail.com',
-		    :cmd => '_cart',
-		    :upload => 1,
-		    :return => "http://localhost:3000/pokemons",
-		    :invoice => "123"
-		    # IPN URL :notify_url => ''
-		  }
-	    values.merge!({
-	      "amount_1" => "11",
-	      "item_name_1" => "pikachu",
-	      "item_number_1" => "987",
-	      "quantity_1" => "1"
-	    })
-  		@paypal_url = "https://www.sandbox.paypal.com/cgi-bin/webscr?" + values.to_query
+
+  		#@paypal_url = "https://www.sandbox.paypal.com/cgi-bin/webscr?" + values.to_query
 		
 		# uri = URI.parse("https://api.sandbox.paypal.com/v1/oauth2/token")
 # 
@@ -79,7 +67,7 @@ class PokemonsController < ApplicationController
 		# response = http.request(request)
 		# render :json => response.body
 
-		@test2 = @@data['client_secret']
+		@test2 = "https://www.sandbox.paypal.com/cgi-bin/webscr?" + createPayRequest.to_query
 	end
 
 	private 
